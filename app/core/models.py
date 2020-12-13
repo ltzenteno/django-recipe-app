@@ -7,9 +7,17 @@ from django.contrib.auth.models import (
 
 
 class UserManager(BaseUserManager):
+    """
+    a Manager serves as a 'service' (coming from Java / Spring) for the model
+    it has all the business logic validations and methods needed
+    """
 
     def create_user(self, email, password=None, **extra_fields):
         """Creates, saves and returns a new user"""
+
+        if not email:
+            raise ValueError('Users must have an email address')
+
         user = self.model(email=self.normalize_email(email), **extra_fields)
         user.set_password(password)
         user.save(using=self.db)
