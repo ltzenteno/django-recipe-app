@@ -24,3 +24,8 @@ to run the tests:
 to run the tests _and_ linter:
 
     docker-compose run app sh -c "python manage.py test && flake8"
+
+
+### Creating core app
+
+    docker-compose run app sh -c "python manage.py startapp core"
