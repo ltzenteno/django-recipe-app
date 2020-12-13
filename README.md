@@ -13,3 +13,6 @@ Since we have a `docker-compose.yml` file, we can instead run:
 Creating the Django Application (this was needed to be done just once):
 
     docker-compose run app sh -c "django-admin.py startproject app ."
+
+*NOTE:* _Since I'm using a docker container for local development the IDE won't recognize the dependencies, unless I create a virtualenv (using pyenv) in my host machine tand run pip install there.
+Then in the IDE settings choose the correct Python interpreter._
