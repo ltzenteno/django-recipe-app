@@ -28,4 +28,11 @@ to run the tests _and_ linter:
 
 ### Creating core app
 
-    docker-compose run app sh -c "python manage.py startapp core"
+    docker-compose run app sh -c "c startapp core"
+
+
+### Make migrations when a model has been created / updated
+
+To create the DB migration files when craeting or updating models we have to use the `makemigrations` command along with the app name (i.e. `core)
+
+    docker-compose run app sh -c "python manage.py makemigrations core"
