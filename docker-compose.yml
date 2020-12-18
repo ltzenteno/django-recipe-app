@@ -22,6 +22,8 @@ services:
 
   db:
     image: postgres:10-alpine
+    ports:
+      - "5432:5432"  # this is needed to be able to connect via db GUI client
     environment:
       - POSTGRES_DB=app
       - POSTGRES_USER=postgres

@@ -40,3 +40,7 @@ To create the DB migration files when craeting or updating models we have to use
 To run the containers
 
     docker-compose up -d
+
+Once we set up the Postgres DB and the needed tables have been created, we can create a super user with:
+
+    docker-compose run app sh -c "python manage.py createsuperuser"
