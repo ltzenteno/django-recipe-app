@@ -36,3 +36,7 @@ to run the tests _and_ linter:
 To create the DB migration files when craeting or updating models we have to use the `makemigrations` command along with the app name (i.e. `core)
 
     docker-compose run app sh -c "python manage.py makemigrations core"
+
+To run the containers
+
+    docker-compose up -d
