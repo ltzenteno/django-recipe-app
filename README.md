@@ -28,7 +28,7 @@ to run the tests _and_ linter:
 
 ### Creating core app
 
-    docker-compose run app sh -c "c startapp core"
+    docker-compose run --rm app sh -c "c startapp core"
 
 
 ### Make migrations when a model has been created / updated
@@ -44,3 +44,9 @@ To run the containers
 Once we set up the Postgres DB and the needed tables have been created, we can create a super user with:
 
     docker-compose run app sh -c "python manage.py createsuperuser"
+
+Then I created the user app folder with (no need to run again):
+
+    docker-compose run --rm app sh -c "python manage.py startapp user"
+
+*NOTE:* _following the course, I remove the `user/admin.py` `user/models.py`, `user/migrations` since that exists in `core` app. Also I removed `user/tests.py` since I am creating a `user/tests` folder._
