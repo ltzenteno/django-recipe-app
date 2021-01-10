@@ -5,7 +5,10 @@ from rest_framework import (
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from core.models import Tag
+from core.models import (
+    Ingredient,
+    Tag,
+)
 from recipe import serializers
 
 
@@ -30,3 +33,21 @@ class TagViewSet(
     def perform_create(self, serializer):
         """Overriding `perform_create` method"""
         serializer.save(user=self.request.user)
+
+
+class IngredientViewSet(
+    viewsets.GenericViewSet,
+    mixins.ListModelMixin
+):
+    """Manage ingredients in the database"""
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    queryset = Ingredient.objects.all()
+    serializer_class = serializers.IngredientSerializer
+
+    def get_queryset(self):
+        """
+        Overriding the `get_queryset` default method
+        Return objects for the current authenticated user only
+        """
+        return self.queryset.filter(user=self.request.user).order_by('-name')
