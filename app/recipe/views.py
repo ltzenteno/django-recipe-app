@@ -70,3 +70,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
             return serializers.RecipeDetailSerializer
 
         return serializers.RecipeSerializer
+
+    def perform_create(self, serializer):
+        """Overriding `perform_create` method"""
+        serializer.save(user=self.request.user)

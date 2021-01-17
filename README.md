@@ -25,6 +25,16 @@ to run the tests _and_ linter:
 
     docker-compose run --rm app sh -c "python manage.py test && flake8"
 
+to run a specific test method:
+
+- enter the container:
+
+        docker exec -it django-recipe-app_app_1 /bin/sh
+
+- run the test inside the container:
+  
+        python manage.py test recipe.tests.test_recipe_api.PrivateRecipeApiTests.test_create_recipe_with_ingredients
+
 
 ### Creating core app
 
