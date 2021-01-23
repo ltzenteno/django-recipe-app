@@ -31,7 +31,17 @@ class BaseRecipeAttributeViewSet(
         Overriding the `get_queryset` default method
         Return objects for the current authenticated user only
         """
-        return self.queryset.filter(user=self.request.user).order_by('-name')
+        assigned_only = bool(
+            int(self.request.query_params.get('assigned_only', 0))
+        )
+        queryset = self.queryset
+
+        if assigned_only:
+            queryset = queryset.filter(recipe__isnull=False)
+
+        return queryset.filter(
+            user=self.request.user
+        ).order_by('-name').distinct()  # we make sure that the objects we return are unique # noqa: E501
 
     def perform_create(self, serializer):
         """Overriding `perform_create` method"""
